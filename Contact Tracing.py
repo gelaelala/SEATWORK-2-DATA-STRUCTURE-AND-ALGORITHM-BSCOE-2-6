@@ -39,9 +39,9 @@ print ()
 # ask user input and create option 1: add items
 contact_tracing  = {}
 while True:
-    user_input = input("Which from the option do you want to do? (1-3) ")
+    user_input = int(input("Which from the option do you want to do? (1-3) "))
     print ()
-    if user_input == '1':
+    if user_input == 1:
         header_info = "══════════════════════════════ ADDING INFORMATION ═════════════════════════════════════"
         print (stylize (header_info, colored.fg ('wheat_1')))
         print (stylize("    * Please add all the necessary information being asked. If none, write N/A. *", colored.fg ('gold_1')))
@@ -68,6 +68,11 @@ while True:
         print ()
         time.sleep (3)
         print (stylize (f"* NOTICE: DETAILS FOR {full_name.upper()} HAS BEEN SAVED! *", colored.fg('gold_1')))
+        time.sleep (1)
+        print ()
+        print (stylize ("═" * len(header_info), colored.fg ('wheat_1')))
+        print ()
+        time.sleep (1)
         contact_tracing[full_name.title()] = {
             f"Fullname: {full_name.title()}",
             f"Age: {age} years old",
@@ -83,6 +88,24 @@ while True:
             f"Booster Shot Date: {booster_date}",
             f"Brand of Booster Shot: {booster_vac_brand}"
         }
+    elif user_input == 2: # create option 2: search for item (full name)
+        header_search = "══════════════════════════════ SEARCH FOR INFO ═════════════════════════════════════"
+        print (stylize (header_info, colored.fg ('sky_blue_3')))
+        print ()
+        name_input = input(stylize("Pleasr type the name of the person here (LAST NAME, FIRST NAME, MIDDLE INITIAL): ", colored.fg('sky_blue_3')))
+        name = name_input.title()
+        print ()
+        time.sleep (2)
+        if f"{name}" in contact_tracing:
+            print (stylize ("Name has been found. Generating the form.", colored.fg ('pale_green_3b')))
+            print ()
+            time.sleep (2)
+        else:
+            print (stylize ("Sorry, the name you entered is not registered in our list of contact tracing details. Please try again.", colored.fg('red_1')))
+            print ()
+            print (stylize ("═" * len(header_search), colored.fg('sky_blue_3')))
+            print ()
+            time.sleep (1)
+            
 
-# create option 2: search for item (full name)
 # create option 3: exit program
