@@ -3,12 +3,11 @@
 # key: full name
 # value: another dictionary of personal information
 
-# import modules (colored for colored text, timer for when the next text to appear, datetime for the current date and time when the contact tracing form was generated, sys for when the user decides to exit program)
+# import modules (colored for colored text, timer for when the next text to appear, datetime for the current date and time when the contact tracing form was generated)
 import colored
 from colored import stylize
 import time 
 from datetime import datetime
-import sys
 
 # write program intro
 header = "══════════════════════════════ CONTACT TRACING ════════════════════════════════════════"
@@ -41,7 +40,7 @@ print ()
 # ask user input and create option 1: add items
 contact_tracing  = {}
 while True:
-    user_input = int(input("Which from the option do you want to do (1-3)? "))
+    user_input = int(input("               Which from the option do you want to do (1-3)? "))
     print ()
     if user_input == 1:
         header_info = "══════════════════════════════ ADDING INFORMATION ═════════════════════════════════════"
@@ -125,11 +124,11 @@ while True:
             print ()
             time.sleep (1)
     elif user_input == 3: # create option 3: exit program
-        header_exit = "══════════════════════════════ EXIT PROGRAM ═════════════════════════════════════"
+        header_exit = "═════════════════════════════════ EXIT PROGRAM ════════════════════════════════════════"
         print (stylize (header_exit, colored.fg('light_pink_1')))
         print ()
         time.sleep(1)
-        exit_ques = input("         Do you want to exit the program (yes/no): ").upper()
+        exit_ques = input("               Do you want to exit the program (yes/no): ").upper()
         print ()
         time.sleep (1)
         if exit_ques == 'YES':
@@ -137,7 +136,7 @@ while True:
             print ()
             time.sleep (1)
             print (stylize ("═" * len(header_exit), colored.fg('light_pink_1')))
-            sys.exit
+            break
         else: 
             print (stylize ("Program will continue as said so. Please wait a little.", colored.fg ('light_green_3')))
             print ()
