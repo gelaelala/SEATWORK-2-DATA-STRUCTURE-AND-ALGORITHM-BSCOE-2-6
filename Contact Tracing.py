@@ -36,6 +36,22 @@ print (stylize ("═" * len(header_menu), colored.fg ('pale_green_3b')))
 time.sleep (1)
 
 # ask user input
+contact_tracing  = {}
+while True:
+    user_input = input("Which from the option do you want to do? (1-3) ")
+    print ()
+    if user_input == '1':
+        print (stylize ("══════════════════════════════ ADDING INFORMATION ═════════════════════════════════════", colored.fg ('wheat_1')))
+        print (stylize("    * Please add all the necessary information being asked. If none, write N/A. *", colored.fg ('gold_1')))
+        print ()
+        time.sleep(1)
+        full_name = input (stylize ("Please type your full name here (LAST NAME, FIRST NAME, MIDDLE INITIAL): ", colored.fg ('wheat_1')))
+        age = input (stylize ("Enter age here: ", colored.fg ('wheat_1')))
+        contact_tracing[full_name] = {
+            f"Fullname: {full_name.title()}",
+            f"Age: {age} years old"
+        }
+        print (contact_tracing)
 # create option 1: add items
 # create option 2: search for item (full name)
 # create option 3: exit program
