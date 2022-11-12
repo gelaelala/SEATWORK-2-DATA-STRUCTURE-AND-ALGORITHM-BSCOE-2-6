@@ -3,10 +3,11 @@
 # key: full name
 # value: another dictionary of personal information
 
-# import modules (colored for colored text, timer for when the next text to appear)
+# import modules (colored for colored text, timer for when the next text to appear, datetime for the current date and time when the contact tracing form was generated)
 import colored
 from colored import stylize
 import time 
+from datetime import datetime
 
 # write program intro
 header = "══════════════════════════════ CONTACT TRACING ════════════════════════════════════════"
@@ -39,7 +40,7 @@ print ()
 # ask user input and create option 1: add items
 contact_tracing  = {}
 while True:
-    user_input = int(input("Which from the option do you want to do? (1-3) "))
+    user_input = int(input("Which from the option do you want to do (1-3)? "))
     print ()
     if user_input == 1:
         header_info = "══════════════════════════════ ADDING INFORMATION ═════════════════════════════════════"
@@ -47,36 +48,37 @@ while True:
         print (stylize("    * Please add all the necessary information being asked. If none, write N/A. *", colored.fg ('gold_1')))
         print ()
         time.sleep(1)
-        full_name = input (stylize ("Please type your full name here (LAST NAME, FIRST NAME, MIDDLE INITIAL): ", colored.fg ('wheat_1')))
+        full_name = input (stylize ("Please type your full name here (LAST NAME, FIRST NAME, MIDDLE INITIAL): ", colored.fg ('wheat_1'))).title()
         age = input (stylize ("Enter age here: ", colored.fg ('wheat_1')))
-        sex = input (stylize ("Enter sex here: ", colored.fg ('wheat_1')))
+        sex = input (stylize ("Enter sex here (MALE/FEMALE): ", colored.fg ('wheat_1'))).upper()
         birthday = input (stylize ("Enter your birthday here (MM/DD/YYYY): ", colored.fg ('wheat_1')))
         phone_number = input (stylize ("Enter your phone number here: ", colored.fg('wheat_1')))
         email = input (stylize ("Enter your email address here: ", colored.fg ('wheat_1')))
         first_vac = input (stylize ("Enter the date of your first vaccination here (MM/DD/YYYY): ", colored.fg('wheat_1')))
-        first_vac_brand = input (stylize ("Enter the brand of vaccination for first dose: ", colored.fg ('wheat_1')))
+        first_vac_brand = input (stylize ("Enter the brand of vaccination for first dose: ", colored.fg ('wheat_1'))).title()
         second_vac = input (stylize ("Enter the date of your second vaccination here (MM/DD/YYYY): ", colored.fg ('wheat_1')))
-        second_vac_brand = input (stylize ("Enter the brand of vaccination for second dose: ", colored.fg ('wheat_1')))
-        booster = input (stylize ("Had booster shot (yes/no):", colored.fg ('wheat_1')))
+        second_vac_brand = input (stylize ("Enter the brand of vaccination for second dose: ", colored.fg ('wheat_1'))).title()
+        booster = input (stylize ("Had booster shot (yes/no): ", colored.fg ('wheat_1'))).upper()
         print ()
         time.sleep (1)
         print (stylize ("* For booster shot details, if YES, please indicate details below. If NO, please write N/A for the following details. *", colored.fg('gold_1')))
         print ()
         time.sleep (1)
         booster_date = input (stylize ("Enter the date of your booster shot here (MM/DD/YYYY): ", colored.fg('wheat_1')))
-        booster_vac_brand = input (stylize ("Enter the brand of vaccination for booster shot: ", colored.fg ('wheat_1')))
+        booster_vac_brand = input (stylize ("Enter the brand of vaccination for booster shot: ", colored.fg ('wheat_1'))).title()
         print ()
         time.sleep (3)
         print (stylize (f"* NOTICE: DETAILS FOR {full_name.upper()} HAS BEEN SAVED! *", colored.fg('gold_1')))
+        print (stylize (f"* A total of {len(contact_tracing) + 1} person/s saved on the contact list *", colored.fg('gold_1')))
         time.sleep (1)
         print ()
         print (stylize ("═" * len(header_info), colored.fg ('wheat_1')))
         print ()
         time.sleep (1)
-        contact_tracing[full_name.title()] = {
-            f"Fullname: {full_name.title()}",
+        contact_tracing[full_name()] = {
+            f"Fullname: {full_name}",
             f"Age: {age} years old",
-            f"Sex: {sex.upper()}",
+            f"Sex: {sex}",
             f"Birthday: {birthday}",
             f"Phone Number: {phone_number}",
             f"Email Address: {email}",
@@ -84,7 +86,7 @@ while True:
             f"Brand of First Vaccination: {first_vac_brand}",
             f"Second Vaccination Date: {second_vac}",
             f"Brand of Second Vaccination: {second_vac_brand}",
-            f"Booster Shot: {booster.upper()}"
+            f"Booster Shot: {booster}"
             f"Booster Shot Date: {booster_date}",
             f"Brand of Booster Shot: {booster_vac_brand}"
         }
@@ -92,14 +94,27 @@ while True:
         header_search = "══════════════════════════════ SEARCH FOR INFO ═════════════════════════════════════"
         print (stylize (header_info, colored.fg ('sky_blue_3')))
         print ()
-        name_input = input(stylize("Pleasr type the name of the person here (LAST NAME, FIRST NAME, MIDDLE INITIAL): ", colored.fg('sky_blue_3')))
-        name = name_input.title()
+        name_input = input(stylize("Pleasr type the name of the person here (LAST NAME, FIRST NAME, MIDDLE INITIAL): ", colored.fg('sky_blue_3'))).title()
         print ()
         time.sleep (2)
-        if f"{name}" in contact_tracing:
+        if f"{name_input}" in contact_tracing:
             print (stylize ("Name has been found. Generating the form.", colored.fg ('pale_green_3b')))
             print ()
             time.sleep (2)
+            print ()
+            date_time = datetime.now()
+            date = date_time.strftime("%B %d, %Y")
+            time_now = date_time.strftime("%I:%M %p")
+            header_form = f"━━━━━━━━━━━━━━━━━━━━━━━━━━━ CONTACT TRACING DETAILS (as of {date}, {time_now})━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            print (stylize (header_form, colored.fg ('steel_blue_3')))
+            print ()
+            for name in contact_tracing:
+                for detail in contact_tracing[full_name]:
+                    print (detail, ":", contact_tracing[name][detail])
+            print ()
+            print (stylize("━" * len(header_form), colored.fg('steel_blue_3')))
+            print (stylize ("═" * len(header_search), colored.fg('sky_blue_3')))
+            time.sleep(1)
         else:
             print (stylize ("Sorry, the name you entered is not registered in our list of contact tracing details. Please try again.", colored.fg('red_1')))
             print ()
