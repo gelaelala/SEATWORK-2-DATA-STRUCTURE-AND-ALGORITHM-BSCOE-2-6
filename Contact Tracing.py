@@ -114,9 +114,9 @@ def options ():
                 print (stylize (header_form, colored.fg ('steel_blue_3')))
                 print ()
                 time.sleep (1)
-                for name_list in contact_tracing.items():
-                    for key, in contact_tracing [name_input]:
-                        print (key, ":", contact_tracing [name_input][key])
+                for name_input in contact_tracing.items():
+                    for details in contact_tracing [name_input]:
+                        print (details, ":", contact_tracing [name_input][details])
                 print ()
                 time.sleep (1)
                 print (stylize("━" * len(header_form), colored.fg('steel_blue_3')))
