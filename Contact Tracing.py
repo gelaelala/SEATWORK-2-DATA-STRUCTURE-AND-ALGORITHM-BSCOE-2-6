@@ -34,6 +34,7 @@ print ()
 time.sleep (1)
 print (stylize ("═" * len(header_menu), colored.fg ('pale_green_3b')))
 time.sleep (1)
+print ()
 
 # ask user input and create option 1: add items
 contact_tracing  = {}
@@ -41,7 +42,8 @@ while True:
     user_input = input("Which from the option do you want to do? (1-3) ")
     print ()
     if user_input == '1':
-        print (stylize ("══════════════════════════════ ADDING INFORMATION ═════════════════════════════════════", colored.fg ('wheat_1')))
+        header_info = "══════════════════════════════ ADDING INFORMATION ═════════════════════════════════════"
+        print (stylize (header_info, colored.fg ('wheat_1')))
         print (stylize("    * Please add all the necessary information being asked. If none, write N/A. *", colored.fg ('gold_1')))
         print ()
         time.sleep(1)
@@ -63,6 +65,9 @@ while True:
         time.sleep (1)
         booster_date = input (stylize ("Enter the date of your booster shot here (MM/DD/YYYY): ", colored.fg('wheat_1')))
         booster_vac_brand = input (stylize ("Enter the brand of vaccination for booster shot: ", colored.fg ('wheat_1')))
+        print ()
+        time.sleep (3)
+        print (stylize (f"* NOTICE: DETAILS FOR {full_name.upper()} HAS BEEN SAVED! *", colored.fg('gold_1')))
         contact_tracing[full_name.title()] = {
             f"Fullname: {full_name.title()}",
             f"Age: {age} years old",
