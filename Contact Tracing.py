@@ -3,11 +3,12 @@
 # key: full name
 # value: another dictionary of personal information
 
-# import modules (colored for colored text, timer for when the next text to appear, datetime for the current date and time when the contact tracing form was generated)
+# import modules (colored for colored text, timer for when the next text to appear, datetime for the current date and time when the contact tracing form was generated, sys for when the user decides to exit program)
 import colored
 from colored import stylize
 import time 
 from datetime import datetime
+import sys
 
 # write program intro
 header = "══════════════════════════════ CONTACT TRACING ════════════════════════════════════════"
@@ -75,7 +76,7 @@ while True:
         print (stylize ("═" * len(header_info), colored.fg ('wheat_1')))
         print ()
         time.sleep (1)
-        contact_tracing[full_name()] = {
+        contact_tracing[full_name] = {
             f"Fullname: {full_name}",
             f"Age: {age} years old",
             f"Sex: {sex}",
@@ -105,15 +106,17 @@ while True:
             date_time = datetime.now()
             date = date_time.strftime("%B %d, %Y")
             time_now = date_time.strftime("%I:%M %p")
-            header_form = f"━━━━━━━━━━━━━━━━━━━━━━━━━━━ CONTACT TRACING DETAILS (as of {date}, {time_now})━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            header_form = f"━━━━━━━━━━━━━━━━━ CONTACT TRACING DETAILS (as of {date}, {time_now}) ━━━━━━━━━━━━━━━━━"
             print (stylize (header_form, colored.fg ('steel_blue_3')))
             print ()
             for name in contact_tracing:
                 for detail in contact_tracing[full_name]:
-                    print (detail, ":", contact_tracing[name][detail])
+                    print (detail)
             print ()
             print (stylize("━" * len(header_form), colored.fg('steel_blue_3')))
+            print()
             print (stylize ("═" * len(header_search), colored.fg('sky_blue_3')))
+            print()
             time.sleep(1)
         else:
             print (stylize ("Sorry, the name you entered is not registered in our list of contact tracing details. Please try again.", colored.fg('red_1')))
@@ -121,6 +124,24 @@ while True:
             print (stylize ("═" * len(header_search), colored.fg('sky_blue_3')))
             print ()
             time.sleep (1)
-            
-
-# create option 3: exit program
+    elif user_input == 3: # create option 3: exit program
+        header_exit = "══════════════════════════════ EXIT PROGRAM ═════════════════════════════════════"
+        print (stylize (header_exit, colored.fg('light_pink_1')))
+        print ()
+        time.sleep(1)
+        exit_ques = input("         Do you want to exit the program (yes/no): ").upper()
+        print ()
+        time.sleep (1)
+        if exit_ques == 'YES':
+            print (stylize ("Program will close at any moment. Thank you for using our contact tracing program.", colored.fg ('red_1')))
+            print ()
+            time.sleep (1)
+            print (stylize ("═" * len(header_exit), colored.fg('light_pink_1')))
+            sys.exit
+        else: 
+            print (stylize ("Program will continue as said so. Please wait a little.", colored.fg ('light_green_3')))
+            print ()
+            time.sleep (1)
+            print (stylize ("═" * len(header_exit), colored.fg('light_pink_1')))
+            print ()
+            time.sleep (1)
