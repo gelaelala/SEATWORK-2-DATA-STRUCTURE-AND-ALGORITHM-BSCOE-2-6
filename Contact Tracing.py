@@ -35,7 +35,7 @@ time.sleep (1)
 print (stylize ("═" * len(header_menu), colored.fg ('pale_green_3b')))
 time.sleep (1)
 
-# ask user input
+# ask user input and create option 1: add items
 contact_tracing  = {}
 while True:
     user_input = input("Which from the option do you want to do? (1-3) ")
@@ -47,11 +47,37 @@ while True:
         time.sleep(1)
         full_name = input (stylize ("Please type your full name here (LAST NAME, FIRST NAME, MIDDLE INITIAL): ", colored.fg ('wheat_1')))
         age = input (stylize ("Enter age here: ", colored.fg ('wheat_1')))
-        contact_tracing[full_name] = {
+        sex = input (stylize ("Enter sex here: ", colored.fg ('wheat_1')))
+        birthday = input (stylize ("Enter your birthday here (MM/DD/YYYY): ", colored.fg ('wheat_1')))
+        phone_number = input (stylize ("Enter your phone number here: ", colored.fg('wheat_1')))
+        email = input (stylize ("Enter your email address here: ", colored.fg ('wheat_1')))
+        first_vac = input (stylize ("Enter the date of your first vaccination here (MM/DD/YYYY): ", colored.fg('wheat_1')))
+        first_vac_brand = input (stylize ("Enter the brand of vaccination for first dose: ", colored.fg ('wheat_1')))
+        second_vac = input (stylize ("Enter the date of your second vaccination here (MM/DD/YYYY): ", colored.fg ('wheat_1')))
+        second_vac_brand = input (stylize ("Enter the brand of vaccination for second dose: ", colored.fg ('wheat_1')))
+        booster = input (stylize ("Had booster shot (yes/no):", colored.fg ('wheat_1')))
+        print ()
+        time.sleep (1)
+        print (stylize ("* For booster shot details, if YES, please indicate details below. If NO, please write N/A for the following details. *", colored.fg('gold_1')))
+        print ()
+        time.sleep (1)
+        booster_date = input (stylize ("Enter the date of your booster shot here (MM/DD/YYYY): ", colored.fg('wheat_1')))
+        booster_vac_brand = input (stylize ("Enter the brand of vaccination for booster shot: ", colored.fg ('wheat_1')))
+        contact_tracing[full_name.title()] = {
             f"Fullname: {full_name.title()}",
-            f"Age: {age} years old"
+            f"Age: {age} years old",
+            f"Sex: {sex.upper()}",
+            f"Birthday: {birthday}",
+            f"Phone Number: {phone_number}",
+            f"Email Address: {email}",
+            f"First Vaccination Date: {first_vac}",
+            f"Brand of First Vaccination: {first_vac_brand}",
+            f"Second Vaccination Date: {second_vac}",
+            f"Brand of Second Vaccination: {second_vac_brand}",
+            f"Booster Shot: {booster.upper()}"
+            f"Booster Shot Date: {booster_date}",
+            f"Brand of Booster Shot: {booster_vac_brand}"
         }
-        print (contact_tracing)
-# create option 1: add items
+
 # create option 2: search for item (full name)
 # create option 3: exit program
