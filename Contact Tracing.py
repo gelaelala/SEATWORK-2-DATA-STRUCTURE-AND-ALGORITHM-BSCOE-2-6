@@ -3,7 +3,11 @@
 # key: full name
 # value: another dictionary of personal information
 
-# import modules
+# import modules (colored for colored text, timer for when the next text to appear)
+import colored
+from colored import stylize
+import time 
+
 # write program intro
 # display menu
 # ask user input
