@@ -76,19 +76,19 @@ while True:
         print ()
         time.sleep (1)
         contact_tracing[full_name] = {
-            f"Fullname: {full_name}",
-            f"Age: {age} years old",
-            f"Sex: {sex}",
-            f"Birthday: {birthday}",
-            f"Phone Number: {phone_number}",
-            f"Email Address: {email}",
-            f"First Vaccination Date: {first_vac}",
-            f"Brand of First Vaccination: {first_vac_brand}",
-            f"Second Vaccination Date: {second_vac}",
-            f"Brand of Second Vaccination: {second_vac_brand}",
-            f"Booster Shot: {booster}"
-            f"Booster Shot Date: {booster_date}",
-            f"Brand of Booster Shot: {booster_vac_brand}"
+            "Fullname": full_name,
+            "Age": f"{age} years old",
+            "Sex": sex,
+            "Birthday": birthday,
+            "Phone Number": phone_number,
+            "Email Address": email,
+            "First Vaccination Date": first_vac,
+            "Brand of First Vaccination": first_vac_brand,
+            "Second Vaccination Date": second_vac,
+            "Brand of Second Vaccination": second_vac_brand,
+            "Booster Shot": booster,
+            "Booster Shot Date": booster_date,
+            "Brand of Booster Shot": booster_vac_brand
         }
     elif user_input == 2: # create option 2: search for item (full name)
         header_search = "══════════════════════════════ SEARCH FOR INFO ═════════════════════════════════════"
@@ -105,12 +105,11 @@ while True:
             date_time = datetime.now()
             date = date_time.strftime("%B %d, %Y")
             time_now = date_time.strftime("%I:%M %p")
-            header_form = f"━━━━━━━━━━━━━━━━━ CONTACT TRACING DETAILS (as of {date}, {time_now}) ━━━━━━━━━━━━━━━━━"
+            header_form = f"━━━━━━━━━━━━━ CONTACT TRACING DETAILS (as of {date}, {time_now}) ━━━━━━━━━━━━━"
             print (stylize (header_form, colored.fg ('steel_blue_3')))
             print ()
-            for name in contact_tracing:
-                for detail in contact_tracing[full_name]:
-                    print (detail)
+            print (stylize"               PERSONAL INFORMATION", colored.fg ('orange_1'))
+            print ("               Name: ", contact_tracing[full_name]["Fullname"])
             print ()
             print (stylize("━" * len(header_form), colored.fg('steel_blue_3')))
             print()
